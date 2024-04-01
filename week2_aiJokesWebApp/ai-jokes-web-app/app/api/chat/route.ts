@@ -14,7 +14,8 @@ export async function POST(req: Request) {
 
   const response = await openai.chat.completions.create({
     // WHY DO WE SPECIFY GPT-3.5 IF WE ARE USING LOCAL MODEL FORM OOBA TEXT-GEN-WEBUI?
-    model: 'gpt-3.5-turbo',
+    // model: 'gpt-3.5-turbo',
+    model: '',
     stream: true,
     messages: [
       {
