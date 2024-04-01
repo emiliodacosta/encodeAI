@@ -42,6 +42,7 @@ const ChatInterface: React.FC = () => {
   const [selectedTopic, setSelectedTopic] = useState<string>('animals');
   const [selectedTone, setSelectedTone] = useState<string>('clever');
   const [selectedChaos, setSelectedChaos] = useState<number>(3);
+  const [preserveChatHistory, setPreserveChatHistory] = useState<boolean>(false);
 
   const { messages, append, isLoading, setMessages } = useChat({
     body: {
@@ -49,7 +50,7 @@ const ChatInterface: React.FC = () => {
     },
   });
 
-  // console.log("messages:", messages);
+  console.log('messages:', messages);
 
   return (
     <div className='max-w-md mx-auto px-4 py-2 border border-gray-300 rounded-lg'>
@@ -68,13 +69,23 @@ const ChatInterface: React.FC = () => {
           }
           className='bg-opacity-25 bg-gray-700 rounded-lg p-4'
         >
-          {messages[messages.length - 2]?.content.startsWith('Rate') && (
+          {messages.map((message, index) => {
+            if (index % 2 === 1) {
+              return (
+                <React.Fragment key={index}>
+                  <div key={index}>{message.content}</div>
+                  <br />
+                </React.Fragment>
+              );
+            }
+          })}
+          {/* {messages[messages.length - 2]?.content.startsWith('Rate') && (
             <>
               <div>{messages[messages.length - 3]?.content}</div>
               <br />
             </>
           )}
-          <div>{messages[messages.length - 1]?.content}</div>
+          <div>{messages[messages.length - 1]?.content}</div> */}
         </div>
       )}
 
@@ -82,8 +93,14 @@ const ChatInterface: React.FC = () => {
         <div className='flex flex-col items-center'>
           <button
             className='mx-auto px-2.5 py-1.25 my-2.5 bg-transparent hover:bg-black font-semibold hover:text-white border border-black hover:border-transparent rounded'
+            // onClick={() => {
+            //   setMessages([]);
+            //   return append({
+            //     role: 'user',
+            //     content: `Generate a joke about the topic of ${selectedTopic} in a very ${selectedTone} tone`,
+            //   });
+            // }}
             onClick={() =>
-              // IS THERE A WAY TO DELETE MESSAGES? I TRIED USING setMessages BUT HAD NO LUCK
               append({
                 role: 'user',
                 content: `Generate a joke about the topic of ${selectedTopic} in a very ${selectedTone} tone`,
