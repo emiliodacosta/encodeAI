@@ -119,18 +119,16 @@ const ChatInterface: React.FC = () => {
         </div>
       )}
 
-      {messages.length > 0 &&
-        !isLoading &&
-        messages[messages.length - 2]?.content.startsWith('Generate') && (
-          <div className='flex flex-col items-center'>
-            <button
-              className='mx-auto px-2.5 py-1.25 mb-2.5 bg-transparent hover:bg-black font-semibold hover:text-white border border-black hover:border-transparent rounded'
-              onClick={handleClickRate}
-            >
-              {`Rate Most Recent Jokens`}
-            </button>
-          </div>
-        )}
+      {messages.length > 0 && !isLoading && messages[messages.length - 2]?.content.startsWith('Generate') && (
+        <div className='flex flex-col items-center'>
+          <button
+            className='mx-auto px-2.5 py-1.25 mb-2.5 bg-transparent hover:bg-black font-semibold hover:text-white border border-black hover:border-transparent rounded'
+            onClick={handleClickRate}
+          >
+            {`Rate Most Recent Jokens`}
+          </button>
+        </div>
+      )}
 
       <div className='flex flex-wrap justify-between'>
         <div className='p-1 mt-1 bg-gray-200 rounded-lg'>
