@@ -32,6 +32,7 @@ export async function POST(req: Request) {
   const { description } = await req.json();
   console.log("description:", description)
   const prompt = `Generate an image of a painting based on the following description: ${description}`;
+  // const prompt = `Generate an original piece of art based on the following description: ${description}`;
   const response = await openai.images.generate({
     // model: "dall-e-2",
     model: "dall-e-3",
